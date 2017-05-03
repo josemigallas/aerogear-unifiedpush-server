@@ -30,7 +30,7 @@ public class Ping {
         try {
 
             if (ProxyConfiguration.hasSocks()) {
-                socket = new Socket(ProxyConfiguration.socks());
+                socket = new Socket(ProxyConfiguration.socks().getAddress(), ProxyConfiguration.socks().getPort());
             } else {
                 socket = new Socket();
             }
