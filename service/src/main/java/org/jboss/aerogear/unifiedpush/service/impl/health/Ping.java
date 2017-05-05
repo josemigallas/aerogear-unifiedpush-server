@@ -21,6 +21,7 @@ import org.jboss.aerogear.unifiedpush.service.proxy.ProxyConfiguration;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.Proxy;
 
 public class Ping {
 
@@ -30,7 +31,12 @@ public class Ping {
         try {
 
             if (ProxyConfiguration.hasSocks()) {
-                socket = new Socket(ProxyConfiguration.socks().getAddress(), ProxyConfiguration.socks().getPort());
+                Proxy socksProxy = new Proxy(Proxy.Type.SOCKS,new InetSocketAddress(ProxyConfiguration.socks().getAddress(), ProxyConfiguration.socks().getPort()));
+                socket = new Socket(socksProxy);
+            } else if (ProxyConfiguration.hasProxyConfig()) {
+                Proxy httpProxy = new Proxy(Proxy.Type.HTTP,new InetSocketAddress(ProxyConfiguration.proxyAddress().getAddress(),ProxyConfiguration.proxyAddress().getPort()));
+                socket = new Socket(httpProxy);
+
             } else {
                 socket = new Socket();
             }
