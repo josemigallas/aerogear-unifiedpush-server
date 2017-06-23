@@ -2,10 +2,10 @@ apiVersion: v1
 kind: Template
 metadata:
   creationTimestamp: null
-  name: fcm-wiremock
+  name: push-network-proxies
   annotations:
-    description: "Simple mock of FCM for testing purposese"
-    tags: "fcm,wiremock,mock,proxy"
+    description: "Simple mock of FCM and APNs for testing purposese"
+    tags: "fcm,wiremock,mock,proxy,apns"
 
 objects:
 - apiVersion: v1
